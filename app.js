@@ -13,7 +13,7 @@ app.use(express.json())
 app.use('/api', require('./router-api'))
 
 let sessionOptions = session({
-    secret: "JavaScript is so cooooooool!",
+    secret: process.env.SESSIONOPTIONSECRET,
     store: new MongoStore({client: require('./db')}),
     resave: false,
     saveUninitialized: false,
@@ -24,7 +24,7 @@ app.use(sessionOptions)
 app.use(flash())
 
 app.use(function(req, res, next) {
-    // make our markdown function available from within ejs templates
+    // make markdown function available from within ejs templates
     res.locals.filterUserHTML = function(content) {
         return sanitizeHTML(markdown(content), {allowedTags: ['p', 'br', 'ul', 'ol', 'li','strong', 'bold', 'i', 'em', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']}, {allowedAttributes: []})
     }
