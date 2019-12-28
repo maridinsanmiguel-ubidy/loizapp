@@ -104,6 +104,8 @@ export default class RegistrationForm {
     passwordAfterDelay() {
         if (this.password.value.length < 12) {
             this.showValidationError(this.password, "Password atleast 12 characters.")
+        } else {
+            this.showNoValidationError(this.password, "✔")
         }
     }
 
@@ -126,6 +128,7 @@ export default class RegistrationForm {
                 } else {
                     this.email.isUnique = true
                     this.hideValidationError(this.email)
+                    this.showNoValidationError(this.email, "✔")
                 }
             }).catch(() => {
                 console.log("Please try again later.")
@@ -151,9 +154,17 @@ export default class RegistrationForm {
         el.nextElementSibling.classList.remove("liveValidateMessage--visible")
     }
 
+    showNoValidationError(el, message) {
+        el.nextElementSibling.innerHTML = message
+        el.nextElementSibling.classList.add("liveValidateMessage--visible")
+        el.nextElementSibling.classList.replace("alert-danger", "alert-success")
+        el.errors = false
+    }
+
     showValidationError(el, message) {
         el.nextElementSibling.innerHTML = message
         el.nextElementSibling.classList.add("liveValidateMessage--visible")
+        el.nextElementSibling.classList.replace("alert-success", "alert-danger")
         el.errors = true
     }
     
@@ -168,6 +179,7 @@ export default class RegistrationForm {
                     this.showValidationError(this.username, "That username is already taken.")
                     this.username.isUnique = false
                 } else {
+                    this.showNoValidationError(this.username, "✔")
                     this.username.isUnique = true
                 }
             }).catch(() => {
