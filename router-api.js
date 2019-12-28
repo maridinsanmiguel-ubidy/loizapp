@@ -11,4 +11,7 @@ apiRouter.post('/create-post', userController.apiMustBeLoggedIn, postController.
 apiRouter.delete('/posts/:id', userController.apiMustBeLoggedIn, postController.apiDelete)
 apiRouter.get('/postsByAuthor/:username', userController.apiGetPostsByUsername)
 
+
+// API is not 100% finish
+
 module.exports = apiRouter
