@@ -1,3 +1,3 @@
 # Loizapp Application
 
-Built using modern technologies: node.js, express, mongoDb
+Built using modern technologies: node.js, express, mongoDB
